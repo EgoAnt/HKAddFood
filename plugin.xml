@@ -1,20 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="com.egoant.healthkit.addfood" version="0.0.1">
-    <name>HealthKit Add Food</name>
-    <description>Add food to HealthKit on iOS</description>
-    <license>Apache 2.0</license>
-    <keywords>cordova,HealthKit</keywords>
-    <js-module src="www/HKAddFood.js" name="hkaddfood">
-        <clobbers target="HKAddFood" />
+        id="com.egoant.plugins.hkaddfood"
+        version="0.0.1">
+
+    <name>HKAddFood</name>
+
+    <description>
+        Add food items to iOS8 HealthKit SDK
+    </description>
+
+    <author>Aaron Clifford</author>
+
+    <keywords>Health, HealthKit, Food</keywords>
+
+    <repo>https://github.com/Telerik-Verified-Plugins/HealthKit.git</repo>
+
+    <engines>
+        <engine name="cordova" version=">=3.0.0"/>
+    </engines>
+
+    <js-module src="www/HKAddFood.js" name="HKAddFood">
+        <clobbers target="window.plugins.hkaddfood" />
     </js-module>
+
+    <!-- ios -->
     <platform name="ios">
+
         <config-file target="config.xml" parent="/*">
             <feature name="HKAddFood">
                 <param name="ios-package" value="HKAddFood"/>
             </feature>
         </config-file>
-        <header-file src="src/ios/HKAddFood.h" />
-        <source-file src="src/ios/HKAddFood.m" />
+
+
+        <header-file src="src/ios/HKAddFood.h"/>
+        <source-file src="src/ios/HKAddFood.m"/>
+
+        <framework src="HealthKit.framework" weak="true" />
     </platform>
+
 </plugin>
