@@ -61,4 +61,35 @@ CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStat
 - (void) requestAuthorization:(CDVInvokedUrlCommand*)command {
 NSMutableDictionary *args = [command.arguments objectAtIndex:0];
 }
+
+- (HKObjectType*) getHKObjectType:(NSString*) elem {
+HKObjectType *type = [HKObjectType quantityTypeForIdentifier:elem];
+if (type == nil) {
+type = [HKObjectType characteristicTypeForIdentifier:elem];
+}
+if (type == nil){
+type = [self getHKSampleType:elem];
+}
+return type;
+}
+
+- (HKQuantityType*) getHKQuantityType:(NSString*) elem {
+HKQuantityType *type = [HKQuantityType quantityTypeForIdentifier:elem];
+return type;
+}
+
+- (HKSampleType*) getHKSampleType:(NSString*) elem {
+    HKSampleType *type = [HKObjectType quantityTypeForIdentifier:elem];
+    if (type == nil) {
+    type = [HKObjectType categoryTypeForIdentifier:elem];
+    }
+    if (type == nil) {
+    type = [HKObjectType quantityTypeForIdentifier:elem];
+    }
+    if (type == nil) {
+    type = [HKObjectType correlationTypeForIdentifier:elem];
+    }
+
+    return type;
+}
 @end
