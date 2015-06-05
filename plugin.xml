@@ -13,8 +13,6 @@
 
     <keywords>Health, HealthKit, Food</keywords>
 
-    <repo>https://github.com/Telerik-Verified-Plugins/HealthKit.git</repo>
-
     <engines>
         <engine name="cordova" version=">=3.0.0"/>
     </engines>

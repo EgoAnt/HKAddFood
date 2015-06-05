@@ -9,15 +9,15 @@ HKAddFood.prototype.available = function (successCallback, errorCallback) {
      cordova.exec(successCallback, errorCallback, "HKAddFood", "requestAuthorization", [options]);
 };
                                                                                              
-                                                                                             HKAddFood.install = function () {
+HKAddFood.install = function () {
      if (!window.plugins) {
          window.plugins = {};
      }
 
-                                                                                                 window.plugins.healthkit = new HKAddFood();
-     return window.plugins.healthkit;
+     window.plugins.hkaddfood = new HKAddFood();
+    return window.plugins.hkaddfood;
  };
 
-                                                                                             cordova.addConstructor(HKAddFood.install);
+cordova.addConstructor(HKAddFood.install);
 
 });
