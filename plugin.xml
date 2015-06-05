@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="org.apache.cordova.device" version="0.2.3">
+        id="com.egoant.healthkit.addfood" version="0.0.1">
     <name>HealthKit Add Food</name>
     <description>Add food to HealthKit on iOS</description>
     <license>Apache 2.0</license>
     <keywords>cordova,device</keywords>
-    <js-module src="www/HKAddFood.js" name="device">
-        <clobbers target="device" />
+    <js-module src="www/HKAddFood.js" name="hkaddfood">
+        <clobbers target="HKAddFood" />
     </js-module>
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
             <feature name="HKAddFood">
-                <param name="ios-package" value="CDVAddFood"/>
+                <param name="ios-package" value="HKAddFood"/>
             </feature>
         </config-file>
-        <header-file src="src/ios/CDVAddFood.h" />
-        <source-file src="src/ios/CDVAddFood.m" />
+        <header-file src="src/ios/HKAddFood.h" />
+        <source-file src="src/ios/HKAddFood.m" />
     </platform>
 </plugin>
