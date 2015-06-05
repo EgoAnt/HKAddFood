@@ -3,6 +3,5 @@
 
 @interface HKAddFood : CDVPlugin
 @property (nonatomic) HKHealthStore *healthStore;
-    - (void)hkaddfood:(CDVInvokedUrlCommand*)command;
     - (void)available:(CDVInvokedUrlCommand*)command;
 @end
