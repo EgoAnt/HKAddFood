@@ -36,5 +36,5 @@ CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK 
 
 - (void) requestAuthorization:(CDVInvokedUrlCommand*)command {
 NSMutableDictionary *args = [command.arguments objectAtIndex:0];
-
+}
 @end
