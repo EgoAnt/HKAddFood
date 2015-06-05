@@ -4,7 +4,7 @@
     <name>HealthKit Add Food</name>
     <description>Add food to HealthKit on iOS</description>
     <license>Apache 2.0</license>
-    <keywords>cordova,device</keywords>
+    <keywords>cordova,HealthKit</keywords>
     <js-module src="www/HKAddFood.js" name="hkaddfood">
         <clobbers target="HKAddFood" />
     </js-module>

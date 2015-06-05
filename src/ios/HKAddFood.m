@@ -12,7 +12,7 @@
     
     HKQuantityType *quantityType = [HKQuantityType quantityTypeForIdentifier:
                                     HKQuantityTypeIdentifierDietaryCalories];
-    HKQuantity *quantity = [HKQuantity quantityWithUnit:[HKUnit kiloCalorieUnit] doubleValue:(double)];
+                                    HKQuantity *quantity = [HKQuantity quantityWithUnit:[HKUnit kiloCalorieUnit] doubleValue:foodCalories];
     
     NSDate *objDate = [NSDate date];
     NSDictionary *metaData = @{HKMetadataKeyFoodType:foodName};
