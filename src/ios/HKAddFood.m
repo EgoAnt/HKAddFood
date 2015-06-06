@@ -59,7 +59,7 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 }
 
 - (void) saveFoodItem:(CDVInvokedUrlCommand*)command {
-
+	CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:[HKHealthStore isHealthDataAvailable]];
 	NSMutableDictionary *args = [command.arguments objectAtIndex:0];
 	NSString *foodName = [args objectForKey:@"foodName"];
 	NSString *foodCalories = [args objectForKey:@"Calories"];
