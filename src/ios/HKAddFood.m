@@ -66,8 +66,8 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 
     double unitDouble = [foodValue doubleValue];
 
-	HKQuantity *quantity = [HKQuantity quantityWithUnit:[HKUnit kilocalorieUnit] doubleValue:unitDouble];
-	HKQuantityType *quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed];
+	HKQuantity *quantity;
+	HKQuantityType *quantityType;
 	
 	if(foodUnit == @"Biotin"){
 		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
@@ -77,7 +77,10 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCaffeine];
 	}else if(foodUnit == @"Calcium"){
 		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
-		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCalcium];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCalcium];	
+	}else if(foodUnit == @"Calories"){
+		quantity  = [HKQuantity quantityWithUnit:[HKUnit kilocalorieUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed];
 	}else if(foodUnit == @"Carbohydrates"){
 		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
 		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCarbohydrates];
