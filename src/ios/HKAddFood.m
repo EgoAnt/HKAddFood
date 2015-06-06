@@ -94,7 +94,53 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 }
 
 - (void) requestAuthorization:(CDVInvokedUrlCommand*)command {
-	NSMutableDictionary *args = [command.arguments objectAtIndex:0];
+  NSMutableDictionary *args = [command.arguments objectAtIndex:0];
+  
+  // read types
+  NSArray *readTypes = [args objectForKey:HKPluginKeyReadTypes];
+  NSSet *readDataTypes = [[NSSet alloc] init];
+  for (int i=0; i<[readTypes count]; i++) {
+    NSString *elem = [readTypes objectAtIndex:i];
+    HKObjectType *type = [self getHKObjectType:elem];
+    if (type == nil) {
+      CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"readTypes contains an invalid value"];
+      [result setKeepCallbackAsBool:YES];
+      [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+      // not returning deliberately to be future proof; other permissions are still asked
+    } else {
+      readDataTypes = [readDataTypes setByAddingObject:type];
+    }
+  }
+  
+  // write types
+  NSArray *writeTypes = [args objectForKey:HKPluginKeyWriteTypes];
+  NSSet *writeDataTypes = [[NSSet alloc] init];
+  for (int i=0; i<[writeTypes count]; i++) {
+    NSString *elem = [writeTypes objectAtIndex:i];
+    HKObjectType *type = [self getHKObjectType:elem];
+    if (type == nil) {
+      CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"writeTypes contains an invalid value"];
+      [result setKeepCallbackAsBool:YES];
+      [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+      // not returning deliberately to be future proof; other permissions are still asked
+    } else {
+      writeDataTypes = [writeDataTypes setByAddingObject:type];
+    }
+  }
+  
+  [self.healthStore requestAuthorizationToShareTypes:writeDataTypes readTypes:readDataTypes completion:^(BOOL success, NSError *error) {
+    if (success) {
+      dispatch_sync(dispatch_get_main_queue(), ^{
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+      });
+    } else {
+      dispatch_sync(dispatch_get_main_queue(), ^{
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+      });
+    }
+  }];
 }
 
 #pragma mark - helper methods
