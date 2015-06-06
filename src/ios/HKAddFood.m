@@ -77,7 +77,7 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 	quantity:quantity
 	startDate:objDate
 	endDate:objDate
-	metadata:metaData]
+	metadata:metaData];
 
 
 
