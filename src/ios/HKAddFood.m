@@ -64,11 +64,12 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 	NSString *foodName = [args objectForKey:@"foodName"];
 	NSString *foodCalories = [args objectForKey:@"Calories"];
 
+	double calDouble = [foodCalories doubleValue];
+	
 	BOOL requestReadPermission = [args objectForKey:@"requestReadPermission"] == nil ? YES : [[args objectForKey:@"requestReadPermission"] boolValue];
 
-	HKQuantityType *quantityType = [HKQuantityType quantityTypeForIdentifier:
-	HKQuantityTypeIdentifierDietaryCalories];
-	HKQuantity *quantity = [HKQuantity quantityWithUnit:[HKUnit kiloCalorieUnit] doubleValue:(double)];
+	HKQuantityType *quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCalories];
+	HKQuantity *quantity = [HKQuantity quantityWithUnit:[HKUnit kiloCalorieUnit] doubleValue:calDouble];
 
 	NSDate *objDate = [NSDate date];
 	NSDictionary *metaData = @{HKMetadataKeyFoodType:foodName};
