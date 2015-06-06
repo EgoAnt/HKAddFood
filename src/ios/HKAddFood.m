@@ -61,12 +61,129 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 - (void) saveFoodItem:(CDVInvokedUrlCommand*)command {
 	NSMutableDictionary *args = [command.arguments objectAtIndex:0];
 	NSString *foodName = [args objectForKey:@"foodName"];
-	NSString *foodCalories = [args objectForKey:@"Calories"];
+    NSString *foodValue = [args objectForKey:@"foodValue"];
+    NSString *foodUnit = [args objectForKey:@"foodUnit"];
 
-	double calDouble = [foodCalories doubleValue];
+    double unitDouble = [foodValue doubleValue];
 
+	HKQuantity *quantity = [HKQuantity quantityWithUnit:[HKUnit kiloCalorieUnit] doubleValue:unitDouble];
 	HKQuantityType *quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed];
-	HKQuantity *quantity = [HKQuantity quantityWithUnit:[HKUnit kilocalorieUnit] doubleValue:calDouble];
+	
+	if(foodUnit == "Biotin"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryBiotin];
+	}else if(foodUnit == "Caffeine"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCaffeine];
+	}else if(foodUnit == "Calcium"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCalcium];
+	}else if(foodUnit == "Carbohydrates"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCarbohydrates];
+	}else if(foodUnit == "Chloride"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryChloride];
+	}else if(foodUnit == "Cholesterol"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCholesterol];
+	}else if(foodUnit == "Chromium"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryChromium];
+	}else if(foodUnit == "Copper"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCopper];
+	}else if(foodUnit == "EnergyConsumed"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed];
+	}else if(foodUnit == "FatMonounsaturated"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryFatMonounsaturated];
+	}else if(foodUnit == "FatPolyunsaturated"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryFatPolyunsaturated];
+	}else if(foodUnit == "FatSaturated"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryFatSaturated];
+	}else if(foodUnit == "FatTotal"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryFatTotal];
+	}else if(foodUnit == "Fiber"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryFiber];
+	}else if(foodUnit == "Folate"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryFolate];
+	}else if(foodUnit == "Iodine"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryIodine];
+	}else if(foodUnit == "Iron"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryIron];
+	}else if(foodUnit == "Magnesium"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryMagnesium];
+	}else if(foodUnit == "Manganese"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryManganese];
+	}else if(foodUnit == "Molybdenum"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryMolybdenum];
+	}else if(foodUnit == "Niacin"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryNiacin];
+	}else if(foodUnit == "PantothenicAcid"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryPantothenicAcid];
+	}else if(foodUnit == "Phosphorus"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryPhosphorus];
+	}else if(foodUnit == "Potassium"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryPotassium];
+	}else if(foodUnit == "Protein"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryProtein];
+	}else if(foodUnit == "Riboflavin"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryRiboflavin];
+	}else if(foodUnit == "Selenium"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietarySelenium];
+	}else if(foodUnit == "Sodium"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietarySodium];
+	}else if(foodUnit == "Sugar"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietarySugar];
+	}else if(foodUnit == "Thiamin"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryThiamin];
+	}else if(foodUnit == "VitaminA"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryVitaminA];
+	}else if(foodUnit == "VitaminB12"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryVitaminB12];
+	}else if(foodUnit == "VitaminB6"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryVitaminB6];
+	}else if(foodUnit == "VitaminC"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryVitaminC];
+	}else if(foodUnit == "VitaminD"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryVitaminD];
+	}else if(foodUnit == "VitaminE"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryVitaminE];
+	}else if(foodUnit == "VitaminK"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryVitaminK];
+	}else if(foodUnit == "Zinc"){
+		quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+		quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryZinc];
+	}
 
 	NSDate *objDate = [NSDate date];
 	NSDictionary *metaData = @{HKMetadataKeyFoodType:foodName};
