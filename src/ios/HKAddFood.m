@@ -65,8 +65,6 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 	NSString *foodCalories = [args objectForKey:@"Calories"];
 
 	double calDouble = [foodCalories doubleValue];
-	
-	BOOL requestReadPermission = [args objectForKey:@"requestReadPermission"] == nil ? YES : [[args objectForKey:@"requestReadPermission"] boolValue];
 
 	HKQuantityType *quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCalories];
 	HKQuantity *quantity = [HKQuantity quantityWithUnit:[HKUnit kiloCalorieUnit] doubleValue:calDouble];
@@ -84,10 +82,12 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 
 	[self.healthStore saveObject:foodItemSample withCompletion:^(BOOL success, NSError *error){
 		if(success){
-			CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Saved food item"];
+			result = @"saved";
+			CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:result];
 			[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 		}else{
-			CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Error saving food item"];
+			result = @"not saved";
+			CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:result];
 			[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 		}
 	}]
