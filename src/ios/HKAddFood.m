@@ -66,7 +66,7 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 
     double unitDouble = [foodValue doubleValue];
 
-	HKQuantity *quantity = [HKQuantity quantityWithUnit:[HKUnit kiloCalorieUnit] doubleValue:unitDouble];
+	HKQuantity *quantity = [HKQuantity quantityWithUnit:[HKUnit kilocalorieUnit] doubleValue:unitDouble];
 	HKQuantityType *quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed];
 	
 	if(foodUnit == @"Biotin"){
