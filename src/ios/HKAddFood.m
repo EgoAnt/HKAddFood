@@ -72,13 +72,25 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 	NSDate *objDate = [NSDate date];
 	NSDictionary *metaData = @{HKMetadataKeyFoodType:foodName};
 
-	HKQuantityType *foodItemSample =
+	HKQuantitySample *foodItemSample =
 	[HKQuantitySample quantitySampleWithType:quantityType
 	quantity:quantity
 	startDate:objDate
 	endDate:objDate
 	metadata:metaData];
 
+
+	[self.healthStore saveObject:foodItemSample withCompletion:^(BOOL success, NSError *error){
+		if(success){
+			result = @"saved";
+			CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:result];
+			[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+		}else{
+			result = @"not saved";
+			CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:result];
+			[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+		}
+	}];
 }
 
 - (void) requestAuthorization:(CDVInvokedUrlCommand*)command {
