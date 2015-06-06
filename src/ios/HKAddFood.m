@@ -66,6 +66,13 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 
 	double calDouble = [foodCalories doubleValue];
 
+	HKQuantityType *quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCalories];
+	HKQuantity *quantity = [HKQuantity quantityWithUnit:[HKUnit kiloCalorieUnit] doubleValue:calDouble];
+
+	NSDate *objDate = [NSDate date];
+	NSDictionary *metaData = @{HKMetadataKeyFoodType:foodName};
+
+
 }
 
 - (void) requestAuthorization:(CDVInvokedUrlCommand*)command {
