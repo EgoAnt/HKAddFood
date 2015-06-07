@@ -65,7 +65,7 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 
     double unitDouble = [foodValue doubleValue];
 
-	HKQuantityType *quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCalories];
+	HKQuantityType *quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed];
 	HKQuantity *quantity = [HKQuantity quantityWithUnit:[HKUnit kilocalorieUnit] doubleValue:unitDouble];
 
 	NSDate *objDate = [NSDate date];
