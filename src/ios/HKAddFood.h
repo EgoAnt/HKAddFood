@@ -10,5 +10,6 @@
 - (void) requestAuthorization:(CDVInvokedUrlCommand*)command;
 - (void) saveFoodItemCalories:(CDVInvokedUrlCommand*)command;
 - (void) saveFoodItemFatTotal:(CDVInvokedUrlCommand*)command;
+- (void) saveFoodItemCalcium:(CDVInvokedUrlCommand*)command;
 
 @end

@@ -22,4 +22,9 @@ HKAddFood.prototype.saveFoodItemFatTotal = function (options, successCallback, e
     cordova.exec(successCallback, errorCallback, "HKAddFood", "saveFoodItem", [options]);
 };
 
+HKAddFood.prototype.saveFoodItemCalcium = function (options, successCallback, errorCallback) {
+    cordova.exec(successCallback, errorCallback, "HKAddFood", "saveFoodItem", [options]);
+};
+
+
 window.hkaddfood = new HKAddFood();

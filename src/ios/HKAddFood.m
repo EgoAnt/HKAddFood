@@ -128,6 +128,41 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 	}];
 }
 
+- (void) saveFoodItemCalcium:(CDVInvokedUrlCommand*)command {
+	NSMutableDictionary *args = [command.arguments objectAtIndex:0];
+	NSString *foodName = [args objectForKey:@"foodName"];
+    NSString *foodValue = [args objectForKey:@"foodValue"];
+
+    double unitDouble = [foodValue doubleValue];
+
+	HKQuantityType *quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCalcium];
+	HKQuantity *quantity = [HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:unitDouble];
+
+	NSDate *objDate = [NSDate date];
+	NSDictionary *metaData = @{HKMetadataKeyFoodType:foodName};
+
+	HKQuantitySample *foodItemSample =
+	[HKQuantitySample quantitySampleWithType:quantityType
+	quantity:quantity
+	startDate:objDate
+	endDate:objDate
+	metadata:metaData];
+
+
+	[self.healthStore saveObject:foodItemSample withCompletion:^(BOOL success, NSError *error){
+		CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:[HKHealthStore isHealthDataAvailable]];
+		if(success){
+			result = @"saved";
+			CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:result];
+			[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+		}else{
+			result = @"not saved";
+			CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:result];
+			[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+		}
+	}];
+}
+
 - (void) requestAuthorization:(CDVInvokedUrlCommand*)command {
   NSMutableDictionary *args = [command.arguments objectAtIndex:0];
   
