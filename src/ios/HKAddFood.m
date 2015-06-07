@@ -66,8 +66,8 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 
     double unitDouble = [foodValue doubleValue];
 
-	HKQuantity *quantity;
-	HKQuantityType *quantityType;
+	HKQuantity quantity;
+	HKQuantityType quantityType;
 	
 	NSString *Biotin = @"Biotin";
 	NSString *Caffeine = @"Caffeine";
