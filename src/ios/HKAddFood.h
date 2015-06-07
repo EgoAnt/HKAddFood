@@ -8,6 +8,7 @@
 - (void) available:(CDVInvokedUrlCommand*)command;
 - (void) checkAuthStatus:(CDVInvokedUrlCommand*)command;
 - (void) requestAuthorization:(CDVInvokedUrlCommand*)command;
-- (void) saveFoodItem:(CDVInvokedUrlCommand*)command;
+- (void) saveFoodItemCalories:(CDVInvokedUrlCommand*)command;
+- (void) saveFoodItemFatTotal:(CDVInvokedUrlCommand*)command;
 
 @end
