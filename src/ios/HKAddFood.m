@@ -61,12 +61,12 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 - (void) saveFoodItemCalories:(CDVInvokedUrlCommand*)command {
 	NSMutableDictionary *args = [command.arguments objectAtIndex:0];
 	NSString *foodName = [args objectForKey:@"foodName"];
-    NSString *foodValue = [args objectForKey:@"foodValue"];
+	NSString *foodCalories = [args objectForKey:@"foodValue"];
 
-    double unitDouble = [foodValue doubleValue];
+	double calDouble = [foodCalories doubleValue];
 
 	HKQuantityType *quantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed];
-	HKQuantity *quantity = [HKQuantity quantityWithUnit:[HKUnit kilocalorieUnit] doubleValue:unitDouble];
+	HKQuantity *quantity = [HKQuantity quantityWithUnit:[HKUnit kilocalorieUnit] doubleValue:calDouble];
 
 	NSDate *objDate = [NSDate date];
 	NSDictionary *metaData = @{HKMetadataKeyFoodType:foodName};

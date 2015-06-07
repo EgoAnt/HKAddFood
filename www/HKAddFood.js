@@ -15,15 +15,15 @@ HKAddFood.prototype.checkAuthStatus = function (options, successCallback, errorC
 };
 
 HKAddFood.prototype.saveFoodItemCalories = function (options, successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, "HKAddFood", "saveFoodItem", [options]);
+    cordova.exec(successCallback, errorCallback, "HKAddFood", "saveFoodItemCalories", [options]);
 };
 
 HKAddFood.prototype.saveFoodItemFatTotal = function (options, successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, "HKAddFood", "saveFoodItem", [options]);
+    cordova.exec(successCallback, errorCallback, "HKAddFood", "saveFoodItemFatTotal", [options]);
 };
 
 HKAddFood.prototype.saveFoodItemCalcium = function (options, successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, "HKAddFood", "saveFoodItem", [options]);
+    cordova.exec(successCallback, errorCallback, "HKAddFood", "saveFoodItemCalcium", [options]);
 };
 
 
