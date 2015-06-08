@@ -58,6 +58,77 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 	}
 }
 
+- (void) saveFoodItem:(CDVInvokedUrlCommand*)command {
+	NSMutableDictionary *args = [command.arguments objectAtIndex:0];
+	NSString *foodName = [args objectForKey:@"foodName"];
+	NSString *foodCalories = [args objectForKey:@"foodCalories"];
+	NSString *foodProtein = [args objectForKey:@"foodProtein"];
+	NSString *foodCarbohydrates = [args objectForKey:@"foodCarbohydrates"];
+	NSString *foodFatTotal = [args objectForKey:@"foodFatTotal"];
+
+	double dbCalories = [foodCalories doubleValue];
+	double dbProtein = [foodProtein doubleValue];
+	double dbCarbohydrates = [foodCarbohydrates doubleValue];
+	double dbFatTotal = [foodFatTotal doubleValue];
+	
+	if ([HKHealthStore isHealthDataAvailable]) {
+    NSSet* nutritionTypes = [NSSet setWithObjects:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed],
+                    [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCarbohydrates],
+                    [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryFatTotal],
+                    [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryProtein],
+                    nil];
+
+        NSDate* timeFoodWasConsumed = [NSDate date];
+        NSDictionary *metadata = @{
+                HKMetadataKeyFoodType:@foodName,
+                @"HKFoodBrandName":@"Prime Dining", // Restaurant name or packaged food brand name
+        };
+		
+        HKQuantitySample* calories = [HKQuantitySample quantitySampleWithType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed]
+                                                                 quantity:[HKQuantity quantityWithUnit:[HKUnit kilocalorieUnit] doubleValue:dbCalories]
+                                                                startDate:timeFoodWasConsumed
+                                                                  endDate:timeFoodWasConsumed
+                                                                 metadata:metadata];
+
+        HKQuantitySample* protein = [HKQuantitySample quantitySampleWithType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryProtein]
+                                                                    quantity:[HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:dbProtein]
+                                                                   startDate:timeFoodWasConsumed
+                                                                     endDate:timeFoodWasConsumed
+                                                                    metadata:metadata];
+
+
+        HKQuantitySample* carbohydrates = [HKQuantitySample quantitySampleWithType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryCarbohydrates]
+                                                                  quantity:[HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:dbCarbohydrates]
+                                                                 startDate:timeFoodWasConsumed
+                                                                   endDate:timeFoodWasConsumed
+                                                                  metadata:metadata];
+
+        HKQuantitySample* fat = [HKQuantitySample quantitySampleWithType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryFatTotal]
+                                                                quantity:[HKQuantity quantityWithUnit:[HKUnit gramUnit] doubleValue:dbFatTotal]
+                                                               startDate:timeFoodWasConsumed
+                                                                 endDate:timeFoodWasConsumed
+                                                                metadata:metadata];
+
+        HKCorrelation* food = [HKCorrelation correlationWithType:[HKCorrelationType correlationTypeForIdentifier:HKCorrelationTypeIdentifierFood]
+                                                              startDate:timeFoodWasConsumed
+                                                                endDate:timeFoodWasConsumed
+                                                                objects:[NSSet setWithObjects:calories, protein, carbohydrates, fat, nil]
+                                                               metadata:metadata];
+
+        [healthStore saveObject:food withCompletion:^(BOOL success, NSError *error) {
+            if (success) {
+				CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully wrote a food to HealthKit"];
+				[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+            } else {
+				CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Failed to write food to HealthKit"];
+				[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+            }
+        }];
+
+    }];
+
+}
+
 - (void) saveFoodItemCalories:(CDVInvokedUrlCommand*)command {
 	NSMutableDictionary *args = [command.arguments objectAtIndex:0];
 	NSString *foodName = [args objectForKey:@"foodName"];

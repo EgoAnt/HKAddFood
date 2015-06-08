@@ -14,6 +14,10 @@ HKAddFood.prototype.requestAuthorization = function (options, successCallback, e
     cordova.exec(successCallback, errorCallback, "HKAddFood", "requestAuthorization", [options]);
 };
 
+HKAddFood.prototype.saveFoodItem = function (options, successCallback, errorCallback) {
+    cordova.exec(successCallback, errorCallback, "HKAddFood", "saveFoodItem", [options]);
+};
+
 HKAddFood.prototype.saveFoodItemCalories = function (options, successCallback, errorCallback) {
     cordova.exec(successCallback, errorCallback, "HKAddFood", "saveFoodItemCalories", [options]);
 };
