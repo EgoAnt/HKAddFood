@@ -159,7 +159,7 @@ static NSString *const HKPluginKeyUUID = @"UUID";
         HKCorrelation* food = [HKCorrelation correlationWithType:[HKCorrelationType correlationTypeForIdentifier:HKCorrelationTypeIdentifierFood]
                                                               startDate:timeFoodWasConsumed
                                                                 endDate:timeFoodWasConsumed
-                                                                objects:[NSSet setWithObjects:Calories,Biotin,Caffeine,Calcium,Carbohydrates,Chloride,Cholesterol,Chromium,Copper,EnergyConsumed,FatMonounsaturated,FatPolyunsaturated,FatSaturated,FatTotal,Fiber,Folate,Iodine,Iron,Magnesium,Manganese,Molybdenum,Niacin,PantothenicAcid,Phosphorus,Potassium,Protein,Riboflavin,Selenium,Sodium,Sugar,Thiamin,VitaminA,VitaminB12,VitaminB6,VitaminC,VitaminD,VitaminE,VitaminK,Zinc,nil]
+                                                                objects:[NSSet setWithObjects:Calories,Biotin,Caffeine,Calcium,Carbohydrates,Chloride,Cholesterol,Chromium,Copper,FatMonounsaturated,FatPolyunsaturated,FatSaturated,FatTotal,Fiber,Folate,Iodine,Iron,Magnesium,Manganese,Molybdenum,Niacin,PantothenicAcid,Phosphorus,Potassium,Protein,Riboflavin,Selenium,Sodium,Sugar,Thiamin,VitaminA,VitaminB12,VitaminB6,VitaminC,VitaminD,VitaminE,VitaminK,Zinc,nil]
                                                                metadata:metadata];
 
         [self.healthStore saveObject:food withCompletion:^(BOOL success, NSError *error) {
