@@ -115,7 +115,7 @@ static NSString *const HKPluginKeyUUID = @"UUID";
                                                                 objects:[NSSet setWithObjects:calories, protein, carbohydrates, fat, nil]
                                                                metadata:metadata];
 
-        [healthStore saveObject:food withCompletion:^(BOOL success, NSError *error) {
+        [self.healthStore saveObject:food withCompletion:^(BOOL success, NSError *error) {
             if (success) {
 				CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Successfully wrote a food to HealthKit"];
 				[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -124,6 +124,8 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 				[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
             }
         }];
+		
+		
 
 }
 
