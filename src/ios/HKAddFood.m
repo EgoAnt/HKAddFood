@@ -80,7 +80,7 @@ static NSString *const HKPluginKeyUUID = @"UUID";
 
         NSDate* timeFoodWasConsumed = [NSDate date];
         NSDictionary *metadata = @{
-                HKMetadataKeyFoodType:@foodName,
+                HKMetadataKeyFoodType:foodName,
                 @"HKFoodBrandName":@"Prime Dining", // Restaurant name or packaged food brand name
         };
 		
