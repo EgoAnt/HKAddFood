@@ -116,7 +116,7 @@ static NSString *const HKPluginKeyUUID = @"UUID";
                                                                  quantity:[HKQuantity quantityWithUnit:[HKUnit kilocalorieUnit] doubleValue:foodCalories]
                                                                 startDate:timeFoodWasConsumed
                                                                   endDate:timeFoodWasConsumed
-                                                                 metadata:metadata];
+                                                                 metadata:metadata]; 
         
 		HKQuantitySample* Biotin = [HKQuantitySample quantitySampleWithType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryBiotin] quantity:[HKQuantity quantityWithUnit:[HKUnit gramUnitWithMetricPrefix:HKMetricPrefixMicro] doubleValue:foodBiotin] startDate:timeFoodWasConsumed endDate:timeFoodWasConsumed metadata:metadata];
 		HKQuantitySample* Caffeine = [HKQuantitySample quantitySampleWithType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryBiotin] quantity:[HKQuantity quantityWithUnit:[HKUnit gramUnitWithMetricPrefix:HKMetricPrefixMilli] doubleValue:foodCaffeine] startDate:timeFoodWasConsumed endDate:timeFoodWasConsumed metadata:metadata];
